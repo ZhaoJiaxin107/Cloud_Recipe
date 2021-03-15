@@ -9,7 +9,7 @@
     </view>
     <!-- 登录页面 -->
     <view class="login" wx:else>
-      <image src="{{userInfo.avatarUrl}}"></image>
+      <image src="{{userInfo.avatarUrl}}" bindtap="_goCate"></image>
       <view class="name">
         {{userInfo.nickName}}
       </view>
@@ -18,8 +18,9 @@
 
   <!-- 导航栏 -->
   <view class="menu">
-    <view class="active">菜单</view>
-    <view>关注</view>
+    <view class="{{currentIndex==0?'active':''}}" bindtap = "_changeActive" data-index="0">菜单</view>
+    <view class="{{currentIndex==1?'active':''}}" bindtap = "_changeActive"
+    data-index="1">关注</view>
   </view>
 
   <!-- 内容显示 -->
@@ -75,7 +76,7 @@
         </view>
       </view>
       <!-- 加号 -->
-      <view class="jia">
+      <view class="jia" bindtap = "_goPbrecipe">
         <image src="../../static/my/jia.png"></image>
       </view>
     </view>

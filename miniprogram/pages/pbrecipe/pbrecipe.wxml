@@ -9,7 +9,7 @@
 			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell">
 					<view class="weui-cell__bd">
-						<input class="weui-input" placeholder="请输入菜单名称" />
+						<input class="weui-input" placeholder="请输入菜单名称" name = "recipeName"/>
 					</view>
 				</view>
 			</view>
@@ -18,15 +18,11 @@
 			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell">
 					<view class="weui-cell__bd">
-						<radio-group name="recipeTypeid">
+						<radio-group name="recipeTypeId">
 							<!-- 循环遍历菜谱分类 -->
-							<block>
+							<block wx:for="{{typesList}}">
               <!-- 给当前分类加了一个默认值，随便去了index为0的，第一个 -->
-								<radio color="#ea932c" value="儿童菜谱" style="font-size:13.5px">儿童菜谱</radio>
-								<radio color="#ea932c" value="儿童菜谱" style="font-size:13.5px">儿童菜谱</radio>
-								<radio color="#ea932c" value="儿童菜谱" style="font-size:13.5px">儿童菜谱</radio>
-								<radio color="#ea932c" value="儿童菜谱" style="font-size:13.5px">儿童菜谱</radio>
-								<radio color="#ea932c" value="儿童菜谱" style="font-size:13.5px">儿童菜谱</radio>
+								<radio color="#ea932c" value="{{item.typeName}}" style="font-size:13.5px" checked="{{index==0}}">{{item.typeName}}</radio>
 							</block>
 						</radio-group>
 					</view>
@@ -42,7 +38,10 @@
 								<mp-uploader 
                     max-count="5" 
 										style="font-size:14px"
-                    title="图片选择" 
+                    title="图片选择"
+										files = "{{filesList}}"
+										bindselect = "_selectImage"
+										binddelete = "_deleteImage"
                     ></mp-uploader>
 							</mp-cell>
 						</mp-cells>
@@ -54,14 +53,13 @@
 			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell">
 					<view class="weui-cell__bd">
-						<textarea class="weui-textarea" name="recipesMake" placeholder-style="font-size:26rpx" placeholder="请输入菜品做法" style="height: 6.6em" />
+						<textarea class="weui-textarea" name="recipesMakes" placeholder-style="font-size:26rpx" placeholder="请输入菜品做法" style="height: 6.6em" />
 						<view class="weui-textarea-counter">不限字数</view>
           </view>
         </view>
       </view>
       <!-- 发布  需要当前用户的openid（云开发自带）-->
         <button class="weui-btn"  type="primary" form-type="submit">发布</button>
-   
     </form>
   </view>
 </view>

@@ -1,12 +1,15 @@
 // pages/my/my.js
 import config from '../../utils/config'
 import api from '../../utils/api'
+import admin from '../../utils/admin'
+console.log(admin)
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    currentIndex: "0",
     userInfo:"", // 存储用户信息
     isLogin: false, //是否登录。 false 未登录  true，已经登录
     recipes: [{
@@ -206,7 +209,7 @@ Page({
         // console.log(res)
         let openid = res.result.openid
         let userInfo = e.detail.userInfo
-        console.log(userInfo)
+        // console.log(userInfo)
         // 利用openid查询数据库users, 判断是否是新用户, 如果是新用户，
         // 则存于数据表再存入缓存中, 如果是老用户，直接缓存信息
         let result =await api.findAll(config.userTable, {_openid:openid})
@@ -215,7 +218,7 @@ Page({
         if(result == null) {
           // 插入数据表
           let result = await api.add(config.userTable, {userInfo})
-          console.log(result)
+          // console.log(result)
         }
         // 老用户 把openid和用户数据都存入缓存中
         that.setData({
@@ -226,5 +229,34 @@ Page({
         wx.setStorageSync('openid', openid)
       }
     })
+   },
+   // 跳转分类页面
+   _goCate () {
+     let openid = wx.getStorageSync('openid')
+     if(openid!=admin){
+       wx.showToast({
+         title: '您不是管理员！！',
+         icon: 'none'
+       })
+       return
+     }
+     // 管理员
+     wx.navigateTo({
+       url: '../category/category'
+     })
+   },
+   // 切换选项卡样式
+   _changeActive (e) {
+     let index = e.currentTarget.dataset.index
+     // console.log(index)
+     this.setData({
+       currentIndex: index
+     })
+   },
+   // 跳转到发布菜谱页面
+   _goPbrecipe(){
+     wx.navigateTo({
+       url: '../pbrecipe/pbrecipe'
+     })
    }
 })
