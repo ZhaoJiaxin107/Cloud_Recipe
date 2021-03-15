@@ -38,7 +38,7 @@
       <!-- 菜单列表 -->
       <view>
         <!-- 没有东西 -->
-        <view wx:if="{{ !true }}" class="no-pbmenu">
+        <view wx:if="{{ recipes.length<=0 }}" class="no-pbmenu">
           <image src="../../static/my/img01.jpg"></image>
           <view>您还没发布过菜单哦</view>
         </view>
@@ -49,18 +49,18 @@
               <!-- 内容区域 -->
               <view>
                 <!-- 图片 -->
-                <image src="{{ item.src }}"></image>
+                <image src="{{ item.fileID[0] }}"></image>
                 <!-- 名字 -->
                 <view class="hot-recipe-list-item-title">{{ item.recipeName }}</view>
                 <!-- 发布人及浏览次数 -->
                 <view class="hot-recipe-list-item-info">
                   <view class="left">
-                    <image src="../../imgs/users.png"></image>
-                    <text>放风筝的人</text>
+                    <image src="{{userInfo.avatarUrl}}"></image>
+                    <text>{{userInfo.nickName}}</text>
                   </view>
                   <view class="right">
                     <image src="../../imgs/airs.png"></image>
-                    <text>11321</text>
+                    <text>{{item.views}}</text>
                   </view>
                 </view>
               </view>

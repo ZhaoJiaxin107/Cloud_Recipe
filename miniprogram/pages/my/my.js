@@ -177,6 +177,8 @@ Page({
            isLogin: true,
            userInfo
          })
+         // 登录成功之后调取菜单数据
+         that._getrecipes()
        }else{
          // 未授权——提示用户授权
          wx.showToast({
@@ -225,8 +227,10 @@ Page({
           isLogin: true,
           userInfo
         })
-        wx.setStorageSync('userInfo', userInfo)
+        wx.setStorageSync('userInfo', userInfo),
         wx.setStorageSync('openid', openid)
+        // 登录之后获取数据
+        that._getrecipes()
       }
     })
    },
@@ -257,6 +261,22 @@ Page({
    _goPbrecipe(){
      wx.navigateTo({
        url: '../pbrecipe/pbrecipe'
+     })
+   },
+   // 获取菜单数据
+   async _getrecipes(){
+     console.log("菜单数据")
+     // 根据openid进行查询数据
+     let openid = wx.getStorageSync('openid')
+     let result = await api.findAll(config.recipes, {_openid: openid})
+     console.log(result)
+     // 处理透明度数据
+     result.data.map((item, index) => {
+       return item.opacity = 0
+     })
+     // 数据排序，后发布的显示在前面
+     this.setData({
+       recipes: result.data
      })
    }
 })
