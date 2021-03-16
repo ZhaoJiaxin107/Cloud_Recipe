@@ -19,8 +19,7 @@
   <!-- 导航栏 -->
   <view class="menu">
     <view class="{{currentIndex==0?'active':''}}" bindtap = "_changeActive" data-index="0">菜单</view>
-    <view class="{{currentIndex==1?'active':''}}" bindtap = "_changeActive"
-    data-index="1">关注</view>
+    <view class="{{currentIndex==1?'active':''}}" bindtap = "_changeActive" data-index="1">关注</view>
   </view>
 
   <!-- 内容显示 -->
@@ -65,13 +64,11 @@
                 </view>
               </view>
 
-              <!-- 遮罩层区域 -->
+              <!-- 删除图标遮罩层区域 -->
               <view class="cover" style="opacity: {{ item.opacity }};">
                  <mp-icon bindtap="_doDelete" data-index="{{ index }}" size="30" color="#fff" icon="delete"></mp-icon>
               </view>
-
             </view>
-
           </block>
         </view>
       </view>

@@ -51,7 +51,7 @@ Page({
     let result =await  this._uploadFile(files)
     // console.log(result)
     // 上传到数据库
-    console.log(e)
+    // console.log(e)
     let {recipeName, recipeTypeId, recipesMakes} = e.detail.value
     let views = 0
     let follows = 0

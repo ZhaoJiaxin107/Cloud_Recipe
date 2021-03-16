@@ -150,10 +150,17 @@ Page({
     wx.showModal({
        title:"删除提示",
        content:"您确定删除么？",
-       success(res){
+       async success(res){
             if(res.confirm){
               //执行删除
               console.log('执行删除')
+              // 做的是删除，其实代码是修改, status为0
+              let id = _this.data.recipes[index]._id
+              console.log(id)
+              let result = await api.updateById(config.recipes, id, {status:0})
+              console.log(result)
+              // 查看菜单数据
+              _this._getrecipes()
             }else{
               //取消删除
               _this.data.recipes[index].opacity = 0;
@@ -266,10 +273,10 @@ Page({
    // 获取菜单数据
    async _getrecipes(){
      console.log("菜单数据")
-     // 根据openid进行查询数据
+     // 根据openid进行查询数据, status为1
      let openid = wx.getStorageSync('openid')
-     let result = await api.findAll(config.recipes, {_openid: openid})
-     console.log(result)
+     let result = await api.findAll(config.recipes, {_openid: openid, status: 1},{fild:"time", sort:"desc"})
+     // console.log(result)
      // 处理透明度数据
      result.data.map((item, index) => {
        return item.opacity = 0

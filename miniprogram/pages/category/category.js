@@ -38,7 +38,7 @@ Page({
     let index = typeAllList.findIndex((item, index) => {
       return item.typeName == typeName
     })
-    console.log(index)
+    // console.log(index)
     // 如果能找到，则返回下标，如果找不到, index的值应为-1
     if (index !== -1) {
       wx.showToast({
