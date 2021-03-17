@@ -1,3 +1,5 @@
+import config from "../../utils/config"
+import api from "../../utils/api"
 Page({
     data: {
         types: [
@@ -11,30 +13,34 @@ Page({
             },
         ],
         recipes:[
-            {
-                recipeName:"烤苏格兰蛋",
-                src:"../../imgs/1.jpg"
-            },
-            {
-                recipeName:"法国甜点",
-                src:"../../imgs/2.jpg"
-            },
-            {
-                recipeName:"法式蓝带芝心猪排",
-                src:"../../imgs/3.jpg"
-            },
-            {
-                recipeName:"菠萝煎牛肉扒",
-                src:"../../imgs/4.jpg"
-            },
-            {
-                recipeName:"快手营养三明治",
-                src:"../../imgs/5.jpg"
-            },
-            {
-                recipeName:"顶级菲力牛排",
-                src:"../../imgs/6.jpg"
-            }
         ]
+    },
+    onShow(){
+      this._getHotRecipe()
+    },
+    // 1.获取热门菜谱数据, 根据views进行排序
+    async _getHotRecipe() {
+        // console.log("热门菜谱")
+        let result = await api.findAll(config.recipes,{status: 1}, {fild:"views", sort:"desc"})
+        // console.log(result)
+        // 获取相对应的数据
+        let arr = []
+        result.data.map((item, index) => {
+            // console.log(item._openid)
+            let resList = api.findAll(config.userTable, {
+                _openid: item._openid
+            })
+            arr.push(resList)
+        })
+        let arr1 = await Promise.all(arr)
+        console.log("arr1", arr1)
+
+        result.data.map((item, index) => {
+            return item.userInfo = arr1[index].data[0].userInfo
+        })
+        this.setData({
+            recipes: result.data
+        })
     }
+
 })
