@@ -52,9 +52,9 @@ Page({
     // 跳转到列表页面
     _goListPage(e){
         console.log(e)
-        let {title, typeid} = e.currentTarget.dataset
+        let {title, typeid=null, tag} = e.currentTarget.dataset
         wx.navigateTo({
-          url: '../list/list?typeid='+typeid+'&title='+title
+          url: '../list/list?typeid='+typeid+'&title='+title+"&tag="+tag
         })
     }
 

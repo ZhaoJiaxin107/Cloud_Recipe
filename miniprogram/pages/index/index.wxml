@@ -13,7 +13,7 @@
             <text>菜谱分类</text>
         </view>
         <block wx:for="{{ types }}" wx:if = "{{index<=2}}">
-            <view bindtap="_goListPage" data-typeid = "{{item._id}}" data-title = "{{item.typeName}}">
+            <view bindtap="_goListPage" data-typeid = "{{item._id}}" data-title = "{{item.typeName}}" data-tag="normal">
                 <image src="../../imgs/index_09.jpg"></image>
                 <text>{{ item.typeName }}</text>
             </view>
@@ -22,7 +22,7 @@
 
     <!-- 热门菜谱 -->
     <view class="hot-recipe">
-        <view class="hot-recipe-title">
+        <view class="hot-recipe-title" bindtap="_goListPage" data-title="热门菜谱" data-typeid="null" data-tag="hot">
             <image src="../../imgs/index_18.jpg"></image>
             <text>热门菜谱</text>
         </view>
