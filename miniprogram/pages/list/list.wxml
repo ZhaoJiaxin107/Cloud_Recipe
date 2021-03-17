@@ -1,10 +1,10 @@
 <view>
   <block wx:for="{{ lists }}">
     <view class="list">
-       <image src="{{ item.src }}" class="recipe-image"></image>
+       <image src="{{ item.fileID[0] }}" class="recipe-image"></image>
        <!-- 基本信息 -->
        <view class="list-info">
-          <view class="list-name">{{ item.name }}</view>
+          <view class="list-name">{{ item.recipeName }}</view>
           <view class="list-info-userinfo">
             <image src="{{ item.userInfo.pic }}"></image>
             <text>{{ item.userInfo.nickName }}</text>
@@ -16,7 +16,7 @@
           <view class="number">
             <view>  
               <image src="../../static/list/followed.png"></image>
-              <text>{{ item.follow }}</text>
+              <text>{{ item.follows }}</text>
             </view>
             <view>
               <image src="../../static/list/airs.png"></image>

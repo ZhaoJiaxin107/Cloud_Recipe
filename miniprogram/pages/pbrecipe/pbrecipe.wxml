@@ -22,7 +22,7 @@
 							<!-- 循环遍历菜谱分类 -->
 							<block wx:for="{{typesList}}">
               <!-- 给当前分类加了一个默认值，随便去了index为0的，第一个 -->
-								<radio color="#ea932c" value="{{item.typeName}}" style="font-size:13.5px" checked="{{index==0}}">{{item.typeName}}</radio>
+								<radio color="#ea932c" value="{{item._id}}" style="font-size:13.5px" checked="{{index==0}}">{{item.typeName}}</radio>
 							</block>
 						</radio-group>
 					</view>

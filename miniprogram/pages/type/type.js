@@ -1,19 +1,29 @@
 // pages/type/type.js
+import config from "../../utils/config"
+import api from "../../utils/api"
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    types:[
-      {typename:"营养菜谱",'src':"../../static/type/type01.jpg"},
-      {typename:"儿童菜谱",'src':"../../static/type/type02.jpg"},
-      {typename:"家常菜谱",'src':"../../static/type/type03.jpg"},
-      {typename:"主食菜谱",'src':"../../static/type/type04.jpg"},
-      {typename:"西餐菜谱",'src':"../../static/type/type05.jpg"},
-      {typename:"早餐菜谱",'src':"../../static/type/type06.jpg"},
-    ]
+    types:[]
+  }, 
+  onLoad(){
+    this._getTypeRecipe()
   },
-
- 
+  // 1.获取所有的分类菜谱数据
+  async _getTypeRecipe(){
+    let result = await api.findAll(config.typesTable)
+    this.setData({
+      types: result.data
+    })
+  },
+  // 2.跳转列表页
+  _goListPage(e){
+    let {title, typeid} = e.currentTarget.dataset
+    wx.navigateTo({
+      url:'../list/list?typeid='+typeid+'&title='+title
+    })
+  }
 })

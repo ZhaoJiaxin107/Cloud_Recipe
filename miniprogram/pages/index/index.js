@@ -2,21 +2,14 @@ import config from "../../utils/config"
 import api from "../../utils/api"
 Page({
     data: {
-        types: [
-            {
-                src: "../../imgs/index_07.jpg",
-                typename: "营养菜谱"
-            },
-            {
-                src: "../../imgs/index_09.jpg",
-                typename: "儿童菜谱"
-            },
-        ],
+        types: [],
         recipes:[
+
         ]
     },
     onShow(){
       this._getHotRecipe()
+      this._getType()
     },
     // 1.获取热门菜谱数据, 根据views进行排序
     async _getHotRecipe() {
@@ -40,6 +33,28 @@ Page({
         })
         this.setData({
             recipes: result.data
+        })
+    },
+    // 2.请求分类菜谱数据
+    async _getType(){
+      let result = await api.findAll(config.typesTable)
+      // console.log(result)
+      this.setData({
+          types: result.data
+      })
+    },
+    // 跳转list页面
+    _goTypePage(){
+      wx.navigateTo({
+          url: '../type/type'
+      })
+    },
+    // 跳转到列表页面
+    _goListPage(e){
+        console.log(e)
+        let {title, typeid} = e.currentTarget.dataset
+        wx.navigateTo({
+          url: '../list/list?typeid='+typeid+'&title='+title
         })
     }
 

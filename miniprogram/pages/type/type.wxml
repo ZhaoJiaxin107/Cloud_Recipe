@@ -7,9 +7,9 @@
   <!-- 分类列表 -->
   <view class="type-list">
     <block wx:for="{{ types }}">
-      <view class="list-item">
-        <image src="{{ item.src }}"></image>
-        <text>{{ item.typename }}</text>
+      <view class="list-item" bindtap="_goListPage" data-typeid="{{item._id}}" data-title="{{item.typeName}}">
+        <image src="../../static/type/type02.jpg"></image>
+        <text>{{ item.typeName }}</text>
       </view>
     </block>
   </view>
