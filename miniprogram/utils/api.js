@@ -44,9 +44,14 @@ const updateById = (cname, id, data = {})=>{
     data
   })
 }
+// 5.根据id进行查询
+const findById = (cname, id) => {
+  return db.collection(cname).doc(id).get()
+}
 export default {
   findAll,
   add,
   delById,
-  updateById 
+  updateById,
+  findById
 }

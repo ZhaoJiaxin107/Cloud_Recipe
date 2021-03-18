@@ -26,7 +26,7 @@ Page({
             arr.push(resList)
         })
         let arr1 = await Promise.all(arr)
-        console.log("arr1", arr1)
+        // console.log("arr1", arr1)
 
         result.data.map((item, index) => {
             return item.userInfo = arr1[index].data[0].userInfo
@@ -56,6 +56,14 @@ Page({
         wx.navigateTo({
           url: '../list/list?typeid='+typeid+'&title='+title+"&tag="+tag
         })
+    },
+    // 跳转详情页面
+    _goDetailPage(e){
+        // console.log('go detail page')
+        let { id, title } = e.currentTarget.dataset
+        console.log(id, title)
+        wx.navigateTo({
+          url: '../detail/detail?id='+id+'&title='+title,
+        })
     }
-
 })

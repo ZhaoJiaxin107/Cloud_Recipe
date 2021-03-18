@@ -13,7 +13,7 @@ Page({
   },
   // 1.接收index页面传来的数据
   onLoad(options) {
-    console.log(options)
+    // console.log(options)
     wx.setNavigationBarTitle({
       title: options.title,
     })
@@ -21,18 +21,51 @@ Page({
   },
   // 2.根据typeid请求相关的菜谱分类数据
   async _getData(id, tag) {
-    console.log(tag)
-    // 热门菜谱条件
-    let where = {
-      status: 1
+    // console.log(tag)
+    let where = []
+    let orderBy = []
+    switch (tag) {
+      case 'normal':
+        where = {
+          recipeTypeId: id,
+          status: 1
+        }
+        orderBy = {
+          fild: 'views',
+          sort: 'desc'
+        }
+        break;
+      case "hot":
+        where = {
+          status: 1
+        }
+         orderBy = {
+          fild: "views",
+          sort: "desc"
+        }
+        break;
+      default:
+        break
     }
-    let orderBy = {
-      fild: "views",
-      sort: "desc"
-    }
-    let result = await api.findAll(config.recipes, { recipeTypeId: id, status: 1 },
-      { fild: "views", sort: "desc" })
-    // console.log(result)
+   
+    let result = await api.findAll(config.recipes, where, orderBy)
+    // 处理用户信息问题
+     // 获取相对应的数据
+     let arr = []
+     result.data.map((item, index) => {
+         // console.log(item._openid)
+         let resList = api.findAll(config.userTable, {
+             _openid: item._openid
+         })
+         arr.push(resList)
+     })
+     let arr1 = await Promise.all(arr)
+     // console.log("arr1", arr1)
+
+     result.data.map((item, index) => {
+         return item.userInfo = arr1[index].data[0].userInfo
+     })
+    console.log("list", result)
     if (result != null) {
       this.setData({
         lists: result.data

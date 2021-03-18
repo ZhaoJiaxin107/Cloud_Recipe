@@ -31,7 +31,8 @@
             <block wx:for="{{ recipes }}">
                 <view class="hot-recipe-list-item">
                     <!-- 图片 -->
-                    <image src="{{ item.fileID[0] }}"></image>
+                    <image src="{{ item.fileID[0] }}" bindtap="_goDetailPage"
+                    data-id="{{item._id}}" data-title="{{item.recipeName}}"></image>
                     <!-- 名字 -->
                     <view class="hot-recipe-list-item-title">{{ item.recipeName }}</view>
                     <!-- 发布人及浏览次数 -->

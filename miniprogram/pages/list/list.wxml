@@ -6,12 +6,25 @@
        <view class="list-info">
           <view class="list-name">{{ item.recipeName }}</view>
           <view class="list-info-userinfo">
-            <image src="{{ item.userInfo.pic }}"></image>
+            <image src="{{ item.userInfo.avatarUrl }}"></image>
             <text>{{ item.userInfo.nickName }}</text>
           </view>
-          <view class="xing">
+          <view class="xing" wx:if="{{item.views < 100}}">
             <!-- 星星 -->
+            <!-- 浏览量 0-100 没有星星 100-200 1颗星星 200-300 2颗星星 300-400 3颗星星 400-500 4颗星星 -->
+            <image src="../../static/list/xing0.png"></image>
+          </view>
+          <view class="xing" wx:elif="{{item.views > 100 && item.views < 200}}">
+            <image src="../../static/list/xing1.png"></image>
+          </view>
+          <view class="xing" wx:elif="{{item.views > 200 && item.views < 300}}">
+            <image src="../../static/list/xing2.png"></image>
+          </view>
+          <view class="xing" wx:elif="{{item.views > 300 && item.views < 400}}">
             <image src="../../static/list/xing3.png"></image>
+          </view>
+          <view class="xing" wx:else>
+            <image src="../../static/list/xing4.png"></image>
           </view>
           <view class="number">
             <view>  
