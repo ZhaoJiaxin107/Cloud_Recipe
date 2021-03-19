@@ -42,19 +42,19 @@
   <view class="bottom-set">
     <view class="set-follow">
       <!-- 没有关注 -->
-      <view wx:if="{{ false }}">
+      <view wx:if="{{ !isfollow }}">
         <image src="../../static/detail/follow.png"></image>
-        <text>关注</text>
+        <text bindtap = "_dofollow">关注</text>
       </view>
 
       <!-- 已经关注 -->
       <view wx:else>
         <image src="../../static/detail/followed.png"></image>
-        <text style="color: #ea932a;">已关注</text>
+        <text style="color: #ea932a;" bindtap = "_dofollow">已关注</text>
       </view>
     </view>
     <view class="set-concat">
-      <button>联系客服</button>
+      <button bindtap="_phone">联系客服</button>
     </view>
   </view>
 </view>

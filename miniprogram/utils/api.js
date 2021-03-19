@@ -48,10 +48,15 @@ const updateById = (cname, id, data = {})=>{
 const findById = (cname, id) => {
   return db.collection(cname).doc(id).get()
 }
+// 6.根据条件进行删除
+const delBywhere = (cname, where={})=>{
+  return db.collection(cname).where(where).remove({})
+}
 export default {
   findAll,
   add,
   delById,
   updateById,
-  findById
+  findById,
+  delBywhere
 }

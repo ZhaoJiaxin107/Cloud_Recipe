@@ -21,9 +21,9 @@ Page({
   },
   // 2.跳转列表页
   _goListPage(e){
-    let {title, typeid} = e.currentTarget.dataset
+    let {title, typeid, tag} = e.currentTarget.dataset
     wx.navigateTo({
-      url:'../list/list?typeid='+typeid+'&title='+title
+      url:'../list/list?typeid='+typeid+'&title='+title+"&tag="+tag
     })
   }
 })

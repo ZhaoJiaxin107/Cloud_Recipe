@@ -51,7 +51,7 @@ Page({
     },
     // 跳转到列表页面
     _goListPage(e){
-        console.log(e)
+        // console.log(e)
         let {title, typeid=null, tag} = e.currentTarget.dataset
         wx.navigateTo({
           url: '../list/list?typeid='+typeid+'&title='+title+"&tag="+tag
@@ -61,7 +61,7 @@ Page({
     _goDetailPage(e){
         // console.log('go detail page')
         let { id, title } = e.currentTarget.dataset
-        console.log(id, title)
+        // console.log(id, title)
         wx.navigateTo({
           url: '../detail/detail?id='+id+'&title='+title,
         })

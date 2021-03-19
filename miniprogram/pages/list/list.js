@@ -65,7 +65,7 @@ Page({
      result.data.map((item, index) => {
          return item.userInfo = arr1[index].data[0].userInfo
      })
-    console.log("list", result)
+    // console.log("list", result)
     if (result != null) {
       this.setData({
         lists: result.data
