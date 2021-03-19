@@ -10,12 +10,12 @@
   <!-- 名称 -->
   <view class="info">
     <view class="info-top">
-      <text space="nbsp">l 营养早餐</text>
+      <text space="nbsp">{{detailArr.typeInfo.typeName}}</text>
     </view>
     <view class="info-bottom">
       <view class="left">
-        <image src="../../imgs/users.png"></image>
-        <text space="nbsp">  放风筝的人</text>
+        <image src="{{detailArr.userInfo.avatarUrl}}"></image>
+        <text space="nbsp">{{detailArr.userInfo.nickName}}</text>
       </view>
       <view class="center">
         <image src="../../static/detail/followed.png"></image>
