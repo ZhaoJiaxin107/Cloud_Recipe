@@ -42,9 +42,6 @@ Page({
     this.setData({
       detailArr: result.data
     })
-    this.setData({
-      detailArr: result.data
-    })
     // console.log(this.data.detailArr)
     // 判断用户是否登录
     let openid = wx.getStorageSync('openid') || null
@@ -79,7 +76,7 @@ Page({
       })
       return
     }
-    console.log("已登录")
+    // console.log("已登录")
     // isfollow true已经关注 false未关注
     if(this.data.isfollow){
       // 删除关注表中的数据
