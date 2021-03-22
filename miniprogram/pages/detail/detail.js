@@ -9,7 +9,7 @@ Page({
   data: {
       detailArr: [],
       isfollow: true, // true代表已经关注 false未关注
-      currentId: "" 
+      currentId: "" // 当前的菜谱id
   },
 
   onLoad(options){
@@ -85,14 +85,10 @@ Page({
         recipeID: this.data.currentId
       }
       let removeInfo = await api.delBywhere(config.follows, where)
-      // console.log(removeInfo)
       // 更新 follows 字段
-      let where1 = {
-        _id: this.data.currentId
-      }
-      let updateInfo = await api.updateById(config.recipes, where1, {
-        follows: db.command.inc(-1)
-      })
+      let updateInfo = await api.updateById(config.recipes,this.data.currentId,{
+        follows:db.command.inc(-1)
+     })
       this.setData({
         isfollow: false
       })
@@ -100,7 +96,7 @@ Page({
       return
     }
     // 未关注
-    console.log("未关注")
+    // console.log("未关注")
      // 添加关注表中的数据
      let where2 = {
       recipeID: this.data.currentId
@@ -111,7 +107,7 @@ Page({
       let updateInfo = await api.updateById(config.recipes, this.data.currentId, {
         follows: db.command.inc(1)
       })
-      console.log(updateInfo)
+      // console.log(updateInfo)
     }
     this.setData({
       isfollow: true
